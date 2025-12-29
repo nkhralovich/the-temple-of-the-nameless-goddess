@@ -1,20 +1,6 @@
 # The Temple of The Nameless Goddess
 
-## Requirements
 A script that tests a game "The Temple of The Nameless Goddess" based on d6 rolls.
-
-This week you are asked to make a simple game on a single sheet of paper. Your game should include:
-
-1. A clearly articulated goal, and
-2. A degree of difficulty enhanced by chance and/or skill.
-
-Additionally, you must keep the following limitations in mind:
-
-1. The game should all fit on one piece of paper, ideally letter-sized or A4 so people can print it out, if they wish.
-2. The game should be a one-player game.
-3. A short description and instructions for your game should be at the top of the page.
-4. The only extra thing anyone should need to play are two six-sided dice, which are an optional element you may include in your game.
-
 
 ## The Rules
 
@@ -100,3 +86,59 @@ Additionally, you must keep the following limitations in mind:
 | 9-11 | Looks like this chamber has been abandoned a long ago, or maybe looted by someone else. The only valuable thing you could find here is an old and a little bit stinky robe. Reduces 1 point of damage while you wear it.                                                                                                                                                                                                                                                                                                                                           |
 | 12   | In the corner, you see a cluttered desk. You come closer, and find a bunch of old pergamins and a pile of books. You hands are shaking: maybe The Book of Whispers is here! But no, not this time. Discouraged, you open all the drawers with no hopes. The mostly contain some useless stuff, but you find a big healing potion (1d6+4) in a bottle covered with dust in the last one.                                                                                                                                                                            |
 
+## Coding
+
+
+1. Create a character: HP = ? (randomized), Attack = ? (randomized)
+2. Enter room #1
+3. Draw a random value for the room:
+    - Enemy? → Walk
+    - Reward? → I get HP or +attack
+    - Empty? → Nothing
+4. If an enemy:
+    - I attack (roll the dice)
+    - He attacks (roll the dice)
+    - Repeat until someone dies
+5. If I lose → GAME OVER
+6. If I win → I go to room #2
+7. Repeat from step 2
+8. After X rooms → WIN
+
+
+
+CLASSES:
+
+- player
+    - Attributes: current_hp, max_hp, damage
+    - Methods: attack, is_alive
+
+
+- enemy
+    - Attributes: current_hp, damage
+    - Methods: attack, is_alive
+
+- enemy_factory
+
+
+- reward_strategy
+
+
+
+- room
+    - Attributes: room_type
+    - Methods: roll_room_type, determine_enemy, determine_bonus
+
+    
+- encounter 
+    - Attributes:
+    - Methods: determine_initiative, 
+
+
+- game
+    - Attributes: player, current_room
+    - Methods: enter_room, check_victory, check_defeat
+
+Factory Pattern:
+"W grze RPG występują różne typy wrogów o różnych statystykach. Factory Pattern pozwala na centralne zarządzanie tworzeniem wrogów, co ułatwia dodawanie nowych typów i zapewnia spójność danych."
+Strategy Pattern:
+"System walki wykorzystuje mechanikę attack roll (2d6), która może dać różne wyniki (miss, glancing blow, hit, critical). Strategy Pattern pozwala elegancko obsłużyć każdy typ wyniku bez używania wielokrotnych instrukcji warunkowych, co ułatwia rozszerzanie systemu o nowe typy ataków."
