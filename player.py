@@ -3,31 +3,32 @@ from equipment import EquipmentType, EQUIPMENT_TABLE
 
 
 class Player:
-    def __init__(self, max_hp):
+    def __init__(self, player_name):
         hp_die = SingleDie(die_type=6)
         self.max_hp = hp_die.roll()
-        self.current_hp = max_hp
-        self.armor_die = 0
-        self.damage_die = 1
+        self.player_name = player_name
+        self.current_hp = self.max_hp
+        self.armor = 0 #reprezentuje wartość odejmowaną od obrażeń
+        self.weapon = 2 # reprezentuje kostkę, nie 2 obrażenia!
 
-        print(f"Player created! HP: {self.max_hp}, armor: {self.armor}, damage: {self.damage}")
+        print(f"Player created! HP: {self.max_hp}, armor: {self.armor}, weapon die: {self.weapon}")
 
     def roll_equipment(self) -> None:
         equipment_die = SingleDie(die_type=6)
-        equipment_key = equipment_die.roll()
-        equipment = EQUIPMENT_TABLE[equipment_key]
-        print(f"Your starting equipment is {equipment["description"]}. Congrats!")
-        if equipment["equipment_type"] == EquipmentType.WEAPON:
-            self.damage_die = self.damage + equipment["die"]
-        elif equipment["die"] ==  EquipmentType.ARMOR:
-            self.armor_die = equipment["die"]
+        roll_for_equipment = equipment_die.roll() #tu losujemy ekwipunek
+        equipment = EQUIPMENT_TABLE[roll_for_equipment] # sprawdzamy wynik losowania w słowniku equipment
+        print(f"Your starting equipment is {equipment.description}. Congrats!")
+        if equipment.equipment_type == EquipmentType.WEAPON:
+            self.weapon = equipment.die
+        elif equipment.equipment_type  ==  EquipmentType.ARMOR:
+            self.armor = equipment.die
         else:
             print("Nothing for you today!")
     
     def is_alive(self) -> bool:
         return self.current_hp > 0
     
-    def take_damage(self, damage):
-        self.current_hp = self.current_hp - damage
+    def take_damage(self, damage_taken):
+        self.current_hp = self.current_hp - damage_taken
 
 

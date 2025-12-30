@@ -108,35 +108,13 @@ A script that tests a game "The Temple of The Nameless Goddess" based on d6 roll
 
 CLASSES:
 
-- player
-    - Attributes: current_hp, max_hp, damage
-    - Methods: attack, is_alive
-
-
-- enemy
-    - Attributes: current_hp, damage
-    - Methods: attack, is_alive
-
-- enemy_factory
-
-
-- reward_strategy
-
-
-
-- room
-    - Attributes: room_type
-    - Methods: roll_room_type, determine_enemy, determine_bonus
-
-    
-- encounter 
-    - Attributes:
-    - Methods: determine_initiative, 
-
-
-- game
-    - Attributes: player, current_room
-    - Methods: enter_room, check_victory, check_defeat
+* mamy Player
+* losujemy mu/jej startowy Equipment
+* Player wchodzi do pokoju
+* Pokój zawiera albo potwora, albo księgę (cel), albo nic
+* Jeżeli potwór, automatyczna walka, Jeżeli wygrana, następny pokój, jeżeli przegrana, game over
+* Jeżeli  księga -> wygrana
+* Jeżeli nic, losujemy dalej. 
 
 Factory Pattern:
 "W grze RPG występują różne typy wrogów o różnych statystykach. Factory Pattern pozwala na centralne zarządzanie tworzeniem wrogów, co ułatwia dodawanie nowych typów i zapewnia spójność danych."
