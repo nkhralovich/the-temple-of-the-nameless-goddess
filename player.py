@@ -3,15 +3,15 @@ from equipment import EquipmentType, EQUIPMENT_TABLE
 
 
 class Player:
-    def __init__(self, player_name):
+    def __init__(self, player_name: str):
         hp_die = SingleDie(die_type=6)
         self.max_hp = hp_die.roll()
         self.player_name = player_name
         self.current_hp = self.max_hp
-        self.armor = 0 #reprezentuje wartość odejmowaną od obrażeń
-        self.weapon = 2 # reprezentuje kostkę, nie 2 obrażenia!
+        self.player_armor = 0 #reprezentuje wartość odejmowaną od obrażeń
+        self.player_weapon = 2 # reprezentuje kostkę, nie 2 obrażenia!
 
-        print(f"Player created! HP: {self.max_hp}, armor: {self.armor}, weapon die: {self.weapon}")
+        print(f"Player created! HP: {self.max_hp}, armor: {self.player_armor}, weapon die: d{self.player_weapon}")
 
     def roll_equipment(self) -> None:
         equipment_die = SingleDie(die_type=6)
@@ -19,16 +19,16 @@ class Player:
         equipment = EQUIPMENT_TABLE[roll_for_equipment] # sprawdzamy wynik losowania w słowniku equipment
         print(f"Your starting equipment is {equipment.description}. Congrats!")
         if equipment.equipment_type == EquipmentType.WEAPON:
-            self.weapon = equipment.die
+            self.player_weapon = equipment.die
         elif equipment.equipment_type  ==  EquipmentType.ARMOR:
-            self.armor = equipment.die
+            self.player_armor = equipment.die
         else:
             print("Nothing for you today!")
     
     def is_alive(self) -> bool:
         return self.current_hp > 0
     
-    def take_damage(self, damage_taken):
+    def take_damage(self, damage_taken: int):
         self.current_hp = self.current_hp - damage_taken
 
 
