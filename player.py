@@ -8,7 +8,7 @@ class Player:
         self.max_hp = hp_die.roll()
         self.player_name = player_name
         self.current_hp = self.max_hp
-        self.player_armor = 0 #reprezentuje wartość odejmowaną od obrażeń
+        self.player_armor = 0 # reprezentuje wartość odejmowaną od obrażeń
         self.player_weapon = 2 # reprezentuje kostkę, nie 2 obrażenia!
 
         print(f"Player created! HP: {self.max_hp}, armor: {self.player_armor}, weapon die: d{self.player_weapon}")

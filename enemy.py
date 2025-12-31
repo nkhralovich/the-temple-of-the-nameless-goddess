@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC, staticmethod
 from dice_roller import SingleDie
 from enum import Enum
 
@@ -79,8 +79,6 @@ class Skeleton(Enemy):
         return attack_value/2
 
 
-
-
 class Zombie(Enemy):
     """
     Zombie -- duży silny wróg
@@ -97,9 +95,6 @@ class Zombie(Enemy):
         attack_die = SingleDie(die_type= self.enemy_damage_die)
         attack_value = attack_die.roll()
         return attack_value + 1
-
-
-
 
 
 class EnemyFactory:

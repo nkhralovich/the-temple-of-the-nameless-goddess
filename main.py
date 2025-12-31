@@ -1,7 +1,7 @@
 from dice_roller import SingleDie
 from player import Player
 from room import RoomType, ROOM_TABLE
-from enemy import EnemyFactory, Enemy
+from enemy import EnemyFactory
 
 
 
@@ -13,10 +13,6 @@ class Game:
 
     def start(self):
          self.is_game_running = True
-
-
-    def combat(player, enemy):
-        pass
 
     
     def enter_room(self):
@@ -32,14 +28,14 @@ class Game:
             print(f"You see a big room, moss on the walls, heavy air, and an ancient altar at the center. It is dark, but you can guess the book lies on the altar, among dust, scattered chalices and candles that extinguished long ago. Come get your book, you lucky bastard! And get out of here.")
             pass
 
+    def combat(player, enemy, strategy):
+        pass
+
 
 
 def main():
     name = input("Hello, brave adventurer! Name yourself: ")
-    die = SingleDie(6)
-    result = die.roll()
-    print(f"Great, {name}! Your roll is:")
-    print(result)
+    print(f"Welcome, {name}! Your goal: get the artifact placed in the Main Crypt Chamber before the enemies get you. Good luck!")
 
 
 
