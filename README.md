@@ -86,37 +86,31 @@ A script that tests a game "The Temple of The Nameless Goddess" based on d6 roll
 | 9-11 | Looks like this chamber has been abandoned a long ago, or maybe looted by someone else. The only valuable thing you could find here is an old and a little bit stinky robe. Reduces 1 point of damage while you wear it.                                                                                                                                                                                                                                                                                                                                           |
 | 12   | In the corner, you see a cluttered desk. You come closer, and find a bunch of old pergamins and a pile of books. You hands are shaking: maybe The Book of Whispers is here! But no, not this time. Discouraged, you open all the drawers with no hopes. The mostly contain some useless stuff, but you find a big healing potion (1d6+4) in a bottle covered with dust in the last one.                                                                                                                                                                            |
 
-## Coding
+## Coding part (with simplified rules)
 
+FUNCTION main():
+1. Greet the player, ask for their name
+2. Create a player with that name
+3. Randomly select an equipment item for the player
 
-1. Create a character: HP = ? (randomized), Attack = ? (randomized)
-2. Enter room #1
-3. Draw a random value for the room:
-    - Enemy? → Walk
-    - Reward? → I get HP or +attack
-    - Empty? → Nothing
-4. If an enemy:
-    - I attack (roll the dice)
-    - He attacks (roll the dice)
-    - Repeat until someone dies
-5. If I lose → GAME OVER
-6. If I win → I go to room #2
-7. Repeat from step 2
-8. After X rooms → WIN
+4. WHILE game_is_ongoing:
+a. Enter the room (randomly select a type)
+b. IF book:
+- print "WIN!"
+- end the game
+c. IF empty room:
+- print "Nothing here"
+- continue the loop
+d. IF enemy:
+- ​​create an enemy
+- fight(player, enemy)
+- IF player dead:
+- print "GAME OVER"
+- end the game
 
-
-
-CLASSES:
-
-* mamy Player
-* losujemy mu/jej startowy Equipment
-* Player wchodzi do pokoju
-* Pokój zawiera albo potwora, albo księgę (cel), albo nic
-* Jeżeli potwór, automatyczna walka, Jeżeli wygrana, następny pokój, jeżeli przegrana, game over
-* Jeżeli  księga -> wygrana
-* Jeżeli nic, losujemy dalej. 
 
 Factory Pattern:
 "W grze RPG występują różne typy wrogów o różnych statystykach. Factory Pattern pozwala na centralne zarządzanie tworzeniem wrogów, co ułatwia dodawanie nowych typów i zapewnia spójność danych."
+
 Strategy Pattern:
 "System walki wykorzystuje mechanikę attack roll (2d6), która może dać różne wyniki (miss, glancing blow, hit, critical). Strategy Pattern pozwala elegancko obsłużyć każdy typ wyniku bez używania wielokrotnych instrukcji warunkowych, co ułatwia rozszerzanie systemu o nowe typy ataków."

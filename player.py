@@ -31,4 +31,7 @@ class Player:
     def take_damage(self, damage_taken: int):
         self.current_hp = self.current_hp - damage_taken
 
+    def base_attack(self, player_weapon: int):
+        return SingleDie.roll(player_weapon)
+
 

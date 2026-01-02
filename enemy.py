@@ -7,7 +7,6 @@ class EnemyType(Enum):
     RAT = "rat"
     ZOMBIE = "zombie"
     SKELETON = "skeleton"
-    NONE = "none"
 
 
 ENEMY_TABLE = {
@@ -31,12 +30,10 @@ class Enemy(ABC):
         self.enemy_damage_die = enemy_damage_die
         self.enemy_current_hp = enemy_max_hp
 
-    def is_dead(self) -> bool:
-        if self.enemy_current_hp <= 0:
-            return True
-        return False
+    def is_alive(self) -> bool:
+        return self.current_hp > 0
 
-    def attack(self) -> int:
+    def base_attack(self) -> int:
         attack_outcome = SingleDie.roll(die_type= self.enemy_damage_die)
         return attack_outcome
     
