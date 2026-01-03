@@ -1,4 +1,4 @@
-from abc import ABC, staticmethod
+from abc import ABC
 from dice_roller import SingleDie
 from enum import Enum
 
@@ -31,7 +31,7 @@ class Enemy(ABC):
         self.enemy_current_hp = enemy_max_hp
 
     def is_alive(self) -> bool:
-        return self.current_hp > 0
+        return self.enemy_current_hp > 0
 
     def base_attack(self) -> int:
         attack_outcome = SingleDie.roll(die_type= self.enemy_damage_die)
@@ -70,9 +70,8 @@ class Skeleton(Enemy):
             enemy_damage_die = 4
         )
 
-    def attack(self) -> int:
-        attack_die = SingleDie(die_type= self.enemy_damage_die)
-        attack_value = attack_die.roll()
+    def base_attack(self) -> int:
+        attack_value = SingleDie.roll(die_type= self.enemy_damage_die)
         return attack_value/2
 
 
@@ -88,9 +87,8 @@ class Zombie(Enemy):
         )
 
 
-    def attack(self) -> int:
-        attack_die = SingleDie(die_type= self.enemy_damage_die)
-        attack_value = attack_die.roll()
+    def base_attack(self) -> int:
+        attack_value = SingleDie.roll(die_type= self.enemy_damage_die)
         return attack_value + 1
 
 

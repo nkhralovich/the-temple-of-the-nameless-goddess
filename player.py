@@ -4,8 +4,7 @@ from equipment import EquipmentType, EQUIPMENT_TABLE
 
 class Player:
     def __init__(self, player_name: str):
-        hp_die = SingleDie(die_type=6)
-        self.max_hp = hp_die.roll()
+        self.max_hp = SingleDie.roll(die_type=6)
         self.player_name = player_name
         self.current_hp = self.max_hp
         self.player_armor = 0 # reprezentuje wartość odejmowaną od obrażeń
@@ -14,8 +13,7 @@ class Player:
         print(f"Player created! HP: {self.max_hp}, armor: {self.player_armor}, weapon die: d{self.player_weapon}")
 
     def roll_equipment(self) -> None:
-        equipment_die = SingleDie(die_type=6)
-        roll_for_equipment = equipment_die.roll() #tu losujemy ekwipunek
+        roll_for_equipment = SingleDie.roll(die_type=6) #tu losujemy ekwipunek
         equipment = EQUIPMENT_TABLE[roll_for_equipment] # sprawdzamy wynik losowania w słowniku equipment
         print(f"Your starting equipment is {equipment.description}. Congrats!")
         if equipment.equipment_type == EquipmentType.WEAPON:
@@ -31,7 +29,7 @@ class Player:
     def take_damage(self, damage_taken: int):
         self.current_hp = self.current_hp - damage_taken
 
-    def base_attack(self, player_weapon: int):
-        return SingleDie.roll(player_weapon)
+    def base_attack(self):
+        return SingleDie.roll(self.player_weapon)
 
 

@@ -14,7 +14,7 @@ class AttackResolver:
             return CritStrategy()
 
 
-class Combat:
+class CombatStrategy:
     def __init__(self):
         self.combat_strategy = None 
 

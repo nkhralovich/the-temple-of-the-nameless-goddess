@@ -2,7 +2,7 @@ from dice_roller import SingleDie
 from player import Player
 from room import RoomType, ROOM_TABLE
 from enemy import EnemyFactory
-from combat import Combat, AttackResolver
+from combat import CombatStrategy
 
 
 
@@ -15,31 +15,47 @@ class Game:
     def start(self):
          self.is_game_running = True
 
-
+    @staticmethod
     def combat(player, enemy):
         print("The enemy attacks!")
         while enemy.is_alive() and player.is_alive():
-            player_combat = Combat()
+
+            player_base_damage = player.base_attack()
+            player_combat = CombatStrategy()
             player_combat.define_strategy()
-            base_damage = player.base_attack()
-            final_damage = player_combat.attack(base_damage)
-            enemy.take_damage(final_damage)
+            player_final_damage = player_combat.attack(player_base_damage)
+            enemy.take_damage(player_final_damage)
+
+            if not enemy.is_alive():
+                print("You won!")
+                break
+
+            enemy_base_damage = enemy.base_attack()
+            enemy_combat = CombatStrategy()
+            enemy_combat.define_strategy()
+            enemy_final_damage = enemy_combat.attack(enemy_base_damage)
+            actual_damage = max(0, enemy_final_damage - player.player_armor) 
+            player.take_damage(actual_damage)
+
+            if not player.is_alive():
+                print("You died!")
 
 
+    @staticmethod
+    def enter_room():
+        room_type_roll = SingleDie.roll(die_type=6)
+        room_type = ROOM_TABLE[room_type_roll]
 
-    
-    def enter_room(self):
-        room_type = SingleDie.roll(die_type=6)
-
-        if ROOM_TABLE[room_type] == RoomType.ENEMY:
+        if room_type == RoomType.ENEMY:
             print(f"You see rows of sealed stone coffins. Something moves in the shadows — not alive, but not quite at peace either.")
-            return EnemyFactory.create_enemy()
-        if ROOM_TABLE[room_type] == RoomType.EMPTY:
+            enemy = EnemyFactory.create_enemy()
+            return room_type, enemy
+        if room_type == RoomType.EMPTY:
             print(f"Nothing to do here.")
-            pass
-        if ROOM_TABLE[room_type] == RoomType.BOOK:
+            return room_type, None
+        if room_type == RoomType.BOOK:
             print(f"You see a big room, moss on the walls, heavy air, and an ancient altar at the center. It is dark, but you can guess the book lies on the altar, among dust, scattered chalices and candles that extinguished long ago. Come get your book, you lucky bastard! And get out of here.")
-            pass
+            return room_type, None
 
 
 def main():
@@ -53,7 +69,18 @@ def main():
     game_running = True
 
     while game_running:
-        pass
+        room_type, enemy = Game.enter_room()
+        if room_type == RoomType.BOOK:
+            print("You won!")
+            game_running = False
+        elif room_type == RoomType.ENEMY:
+            Game.combat(player, enemy)
+            if not player.is_alive():
+                print("You died!")
+                game_running = False
+        elif room_type == RoomType.EMPTY:
+            print("Nothing here. Moving  to the next room.")
+
 
 
 if __name__ == '__main__':
