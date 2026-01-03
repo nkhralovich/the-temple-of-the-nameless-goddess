@@ -1,6 +1,6 @@
 # The Temple of The Nameless Goddess
 
-A script that tests a game "The Temple of The Nameless Goddess" based on d6 rolls.
+A program that tests a game "The Temple of The Nameless Goddess" based on d6 rolls.
 
 ## The Rules
 
