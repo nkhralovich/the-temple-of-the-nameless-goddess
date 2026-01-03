@@ -1,10 +1,6 @@
 # Sprawozdanie - Wzorce Projektowe
 ## The Temple of The Nameless Goddess
 
-**Autor:** [Twoje imię i nazwisko]
-**Data:** 2026-01-03
-**Temat:** Implementacja wzorców projektowych w grze RPG
-
 ---
 
 ## 1. Omówienie programu
