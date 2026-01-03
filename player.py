@@ -10,7 +10,7 @@ class Player:
         self.player_armor = 0 # reprezentuje wartość odejmowaną od obrażeń
         self.player_weapon = 2 # reprezentuje kostkę, nie 2 obrażenia!
 
-        print(f"Player created! HP: {self.max_hp}, armor: {self.player_armor}, weapon die: d{self.player_weapon}")
+        
 
     def roll_equipment(self) -> None:
         roll_for_equipment = SingleDie.roll(die_type=6) #tu losujemy ekwipunek
@@ -20,8 +20,7 @@ class Player:
             self.player_weapon = equipment.die
         elif equipment.equipment_type  ==  EquipmentType.ARMOR:
             self.player_armor = equipment.die
-        else:
-            print("Nothing for you today!")
+        print(f"Player created! HP: {self.max_hp}, armor: {self.player_armor}, weapon die: d{self.player_weapon}")
     
     def is_alive(self) -> bool:
         return self.current_hp > 0

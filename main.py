@@ -17,7 +17,7 @@ class Game:
 
     @staticmethod
     def combat(player, enemy):
-        print("The enemy attacks!")
+        print("The enemy tries to attack, but you have better reaction and attack first.")
         while enemy.is_alive() and player.is_alive():
 
             player_base_damage = player.base_attack()
@@ -25,6 +25,7 @@ class Game:
             player_combat.define_strategy()
             player_final_damage = player_combat.attack(player_base_damage)
             enemy.take_damage(player_final_damage)
+            print(f"Enemy takes {player_final_damage} damage.")
 
             if not enemy.is_alive():
                 print("You won!")
@@ -36,6 +37,7 @@ class Game:
             enemy_final_damage = enemy_combat.attack(enemy_base_damage)
             actual_damage = max(0, enemy_final_damage - player.player_armor) 
             player.take_damage(actual_damage)
+            print(f"You take {actual_damage} damage.")
 
             if not player.is_alive():
                 print("You died!")
@@ -45,16 +47,16 @@ class Game:
     def enter_room():
         room_type_roll = SingleDie.roll(die_type=6)
         room_type = ROOM_TABLE[room_type_roll]
+        print("You enter a room...")
 
         if room_type == RoomType.ENEMY:
             print(f"You see rows of sealed stone coffins. Something moves in the shadows — not alive, but not quite at peace either.")
             enemy = EnemyFactory.create_enemy()
+            print(f"Your eyes are adjusted to darkness and you see a {enemy.enemy_name}!")
             return room_type, enemy
         if room_type == RoomType.EMPTY:
-            print(f"Nothing to do here.")
             return room_type, None
         if room_type == RoomType.BOOK:
-            print(f"You see a big room, moss on the walls, heavy air, and an ancient altar at the center. It is dark, but you can guess the book lies on the altar, among dust, scattered chalices and candles that extinguished long ago. Come get your book, you lucky bastard! And get out of here.")
             return room_type, None
 
 
@@ -71,12 +73,11 @@ def main():
     while game_running:
         room_type, enemy = Game.enter_room()
         if room_type == RoomType.BOOK:
-            print("You won!")
+            print(f"You see a big room, moss on the walls, heavy air, and an ancient altar at the center. It is dark, but you can guess the book lies on the altar, among dust, scattered chalices and candles that extinguished long ago. Come get your book, you lucky bastard! And get out of here.")
             game_running = False
         elif room_type == RoomType.ENEMY:
             Game.combat(player, enemy)
             if not player.is_alive():
-                print("You died!")
                 game_running = False
         elif room_type == RoomType.EMPTY:
             print("Nothing here. Moving  to the next room.")
