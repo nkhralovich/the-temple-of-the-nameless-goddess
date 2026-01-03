@@ -56,7 +56,6 @@ class Game:
                 print(f"Your eyes are adjusted to darkness and you see a {enemy.enemy_name}!")
                 return room_type, enemy
             else:
-                # Fallback to empty room if enemy creation failed
                 print("The shadows settle. It was nothing after all.")
                 return RoomType.EMPTY, None
         if room_type == RoomType.EMPTY:

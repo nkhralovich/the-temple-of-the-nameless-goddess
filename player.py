@@ -7,14 +7,14 @@ class Player:
         self.max_hp = SingleDie.roll(die_type=6)
         self.player_name = player_name
         self.current_hp = self.max_hp
-        self.player_armor = 0 # reprezentuje wartość odejmowaną od obrażeń
-        self.player_weapon = 2 # reprezentuje kostkę, nie 2 obrażenia!
+        self.player_armor = 0 
+        self.player_weapon = 2 
 
         
 
     def roll_equipment(self) -> None:
-        roll_for_equipment = SingleDie.roll(die_type=6) #tu losujemy ekwipunek
-        equipment = EQUIPMENT_TABLE[roll_for_equipment] # sprawdzamy wynik losowania w słowniku equipment
+        roll_for_equipment = SingleDie.roll(die_type=6) 
+        equipment = EQUIPMENT_TABLE[roll_for_equipment]
         print(f"Your starting equipment is {equipment.description}. Congrats!")
         if equipment.equipment_type == EquipmentType.WEAPON:
             self.player_weapon = equipment.die

@@ -19,7 +19,7 @@ class CombatStrategy:
         self.combat_strategy = None 
 
     def define_strategy(self):
-        strategy_roll = SingleDie.roll_2d6() # zwraca int (2-12)
+        strategy_roll = SingleDie.roll_2d6()
         self.combat_strategy = AttackResolver.map_combat_strategy(strategy_roll)
 
     

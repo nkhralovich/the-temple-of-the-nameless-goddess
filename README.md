@@ -109,8 +109,3 @@ d. IF enemy:
 - end the game
 
 
-Factory Pattern:
-"W grze RPG występują różne typy wrogów o różnych statystykach. Factory Pattern pozwala na centralne zarządzanie tworzeniem wrogów, co ułatwia dodawanie nowych typów i zapewnia spójność danych."
-
-Strategy Pattern:
-"System walki wykorzystuje mechanikę attack roll (2d6), która może dać różne wyniki (miss, glancing blow, hit, critical). Strategy Pattern pozwala elegancko obsłużyć każdy typ wyniku bez używania wielokrotnych instrukcji warunkowych, co ułatwia rozszerzanie systemu o nowe typy ataków."

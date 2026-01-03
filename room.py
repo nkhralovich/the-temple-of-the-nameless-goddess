@@ -16,4 +16,3 @@ ROOM_TABLE = {
     5: RoomType.EMPTY,
     6: RoomType.BOOK
 }
-# W przyszłości dodam tu dataclass Room, która pozwoli mieć różne opisy dla każdego pokoju + różne efekty (pułapki, nagrody itd) i flagę, która pokaże czy gracz już odwiedził ten pokój.

@@ -20,9 +20,6 @@ ENEMY_TABLE = {
 
 
 class Enemy(ABC):
-    """
-    Klasa abstrakcyjna dla tworzenia wrogów
-    """
 
     def __init__(self, enemy_name: str, enemy_max_hp: int, enemy_damage_die: int):
         self.enemy_name = enemy_name 
@@ -41,7 +38,6 @@ class Enemy(ABC):
         self.enemy_current_hp = self.enemy_current_hp - damage_taken
 
     def __str__(self) -> str:
-          """Reprezentacja tekstowa wroga"""
           return f"{self.enemy_name} (HP: {self.enemy_current_hp}/{self.enemy_max_hp})"
     
 
