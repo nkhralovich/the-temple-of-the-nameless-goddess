@@ -8,7 +8,7 @@ from combat import CombatStrategy
 
 class Game:
     def __init__(self, player_name):
-        self.player = Player(name=player_name)
+        self.player = Player(player_name=player_name)
         self.is_game_running = False
         self.nr_of_chambers = 0
 
@@ -52,8 +52,13 @@ class Game:
         if room_type == RoomType.ENEMY:
             print(f"You see rows of sealed stone coffins. Something moves in the shadows — not alive, but not quite at peace either.")
             enemy = EnemyFactory.create_enemy()
-            print(f"Your eyes are adjusted to darkness and you see a {enemy.enemy_name}!")
-            return room_type, enemy
+            if enemy:
+                print(f"Your eyes are adjusted to darkness and you see a {enemy.enemy_name}!")
+                return room_type, enemy
+            else:
+                # Fallback to empty room if enemy creation failed
+                print("The shadows settle. It was nothing after all.")
+                return RoomType.EMPTY, None
         if room_type == RoomType.EMPTY:
             return room_type, None
         if room_type == RoomType.BOOK:
@@ -65,20 +70,19 @@ def main():
     name = input("Hello, brave adventurer! Name yourself: ")
     print(f"Welcome, {name}! Your goal: get the artifact placed in the Main Crypt Chamber before the enemies get you. Good luck!")
 
-    player = Player(player_name=name)
-    player.roll_equipment()
+    game = Game(player_name=name)
+    game.player.roll_equipment()
+    game.start()
 
-    game_running = True
-
-    while game_running:
+    while game.is_game_running:
         room_type, enemy = Game.enter_room()
         if room_type == RoomType.BOOK:
             print(f"You see a big room, moss on the walls, heavy air, and an ancient altar at the center. It is dark, but you can guess the book lies on the altar, among dust, scattered chalices and candles that extinguished long ago. Come get your book, you lucky bastard! And get out of here.")
-            game_running = False
+            game.is_game_running = False
         elif room_type == RoomType.ENEMY:
-            Game.combat(player, enemy)
-            if not player.is_alive():
-                game_running = False
+            Game.combat(game.player, enemy)
+            if not game.player.is_alive():
+                game.is_game_running = False
         elif room_type == RoomType.EMPTY:
             print("Nothing here. Moving  to the next room.")
 

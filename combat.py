@@ -4,14 +4,14 @@ from damage import *
 class AttackResolver:
     @staticmethod
     def map_combat_strategy(roll: int):
-        if roll <=5:
-            return MissStrategy()
-        elif 6 <= roll <= 8:
-            return GlancingBlowStrategy()
-        elif 9 <= roll <= 11:
-            return FullHitStrategy()
-        else: 
+        if roll == 12:
             return CritStrategy()
+        elif roll >= 10:
+            return FullHitStrategy()
+        elif 7 <= roll <= 9:
+            return GlancingBlowStrategy()
+        else:  # roll <= 6
+            return MissStrategy()
 
 
 class CombatStrategy:
@@ -19,7 +19,7 @@ class CombatStrategy:
         self.combat_strategy = None 
 
     def define_strategy(self):
-        strategy_roll = SingleDie.roll(die_type=12) # zwraca int
+        strategy_roll = SingleDie.roll_2d6() # zwraca int (2-12)
         self.combat_strategy = AttackResolver.map_combat_strategy(strategy_roll)
 
     

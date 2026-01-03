@@ -9,12 +9,12 @@ class AttackOutcome(ABC):
 
 class MissStrategy(AttackOutcome):
     def calculate_damage(self, base_damage: int) -> int:
-        return base_damage * 0
+        return 0
 
 
 class GlancingBlowStrategy(AttackOutcome):
     def calculate_damage(self, base_damage: int) -> int:
-        return base_damage/2
+        return base_damage // 2
 
 
 class FullHitStrategy(AttackOutcome):

@@ -66,13 +66,13 @@ class Skeleton(Enemy):
     def __init__(self):
         super().__init__(
             enemy_name="Shaky old skeleton",
-            enemy_max_hp = 4,
-            enemy_damage_die = 4
+            enemy_max_hp = 2,
+            enemy_damage_die = 6
         )
 
     def base_attack(self) -> int:
         attack_value = SingleDie.roll(die_type= self.enemy_damage_die)
-        return attack_value/2
+        return attack_value // 2
 
 
 class Zombie(Enemy):
@@ -82,7 +82,7 @@ class Zombie(Enemy):
     def __init__(self):
         super().__init__(
             enemy_name="Ugly rotten zombie",
-            enemy_max_hp = 6,
+            enemy_max_hp = 3,
             enemy_damage_die = 6
         )
 
