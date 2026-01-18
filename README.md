@@ -44,7 +44,7 @@ A program that tests a game "The Temple of The Nameless Goddess" based on d6 rol
 6. If no weapon, use unarmored strike (1, no need to roll here, if you hit with a glancing blow, you also deal 0,5 damage. Better than nothing!)
 7. 0 HP = death.
 
-**Table 3. Attack roll
+**Table 3. Attack roll**
 
 | 2d6  | Attack outcome               |
 | ---- | ---------------------------- |
@@ -85,27 +85,4 @@ A program that tests a game "The Temple of The Nameless Goddess" based on d6 rol
 | 7-8  | For a moment, you think you see an outline of a chest in the corner. You run to it, but it is just a play of lights and shadows from the window. What a pity!                                                                                                                                                                                                                                                                                                                                                                                                      |
 | 9-11 | Looks like this chamber has been abandoned a long ago, or maybe looted by someone else. The only valuable thing you could find here is an old and a little bit stinky robe. Reduces 1 point of damage while you wear it.                                                                                                                                                                                                                                                                                                                                           |
 | 12   | In the corner, you see a cluttered desk. You come closer, and find a bunch of old pergamins and a pile of books. You hands are shaking: maybe The Book of Whispers is here! But no, not this time. Discouraged, you open all the drawers with no hopes. The mostly contain some useless stuff, but you find a big healing potion (1d6+4) in a bottle covered with dust in the last one.                                                                                                                                                                            |
-
-## Coding part (with simplified rules)
-
-FUNCTION main():
-1. Greet the player, ask for their name
-2. Create a player with that name
-3. Randomly select an equipment item for the player
-
-4. WHILE game_is_ongoing:
-a. Enter the room (randomly select a type)
-b. IF book:
-- print "WIN!"
-- end the game
-c. IF empty room:
-- print "Nothing here"
-- continue the loop
-d. IF enemy:
-- ​​create an enemy
-- fight(player, enemy)
-- IF player dead:
-- print "GAME OVER"
-- end the game
-
 
